@@ -3,11 +3,13 @@ import { fetchSearchData } from '../../api/youtube';
 
 import {set_Search,fetch_Search_Request} from '../constant'
 
-function* fetchSearch() {
+function* fetchSearch(action) {
   try {
-    console.log('222')
+    // console.log('222')
+    // console.log('Action' ,action.value)
+    const val= action.value
     // Make API request to fetch videos
-    const response = yield call(fetchSearchData);
+    const response = yield call(fetchSearchData,val);
 
     // const searchList = response.data;
     // console.log(response,'response')

@@ -25,7 +25,7 @@ const Card = (props) => {
                 }} />
 
             <View style={{ flexDirection: 'row', padding: 5 }}>
-            <Image source={{uri:`https://i.ytimg.com/vi/${props.id}/hqdefault.jpg`}}
+            <Image source={{uri:`https://i.ytimg.com/vi/${props.channelId}/hqdefault.jpg`}}
                 style={{
                     height: 40,
                     width: 40,

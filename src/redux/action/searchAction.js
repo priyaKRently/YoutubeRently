@@ -1,9 +1,10 @@
 import { fetch_Search_Request, set_Search, } from "../constant";
 
 
-export const fetchSearchRequest = () => {
+export const fetchSearchRequest = (value) => {
   return {
     type: fetch_Search_Request,
+    value
   }
 };
 
