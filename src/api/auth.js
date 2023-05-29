@@ -1,25 +1,32 @@
-import {GoogleSignin} from '@react-native-google-signin/google-signin'
+import { GoogleSignin } from '@react-native-google-signin/google-signin'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const authConfig = async () => {
 
-    // const isLogin = async () => {
-    //     const isSignedIn = await GoogleSignin.isSignedIn();
-
-    // }
     GoogleSignin.configure({
-        scopes: ['https://www.googleapis.com/auth/youtube.readonly'],
+        // scopes: ['https://www.googleapis.com/auth/youtube.readonly'],
         webClientId: '1068155715564-mqkrkna4ndm4pboknd9oj8bstpubucq7.apps.googleusercontent.com',
         offlineAccess: false,
+        scopes: ['https://www.googleapis.com/auth/youtube.force-ssl',
+            'https://www.googleapis.com/auth/youtube.readonly',
+            'https://www.googleapis.com/auth/youtube'
+        ]
     });
     try {
         await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
         const userInfo = await GoogleSignin.signIn();
-        const accessToken = await GoogleSignin.getTokens();
-        // console.log('User Info:', JSON.stringify(userInfo));
-        // console.log(userInfo.idToken)
+
+        AsyncStorage.setItem('@user_Info', JSON.stringify(userInfo));
+
+        const token = await GoogleSignin.getTokens();
+        AsyncStorage.setItem('access_Token', JSON.stringify(token.accessToken));
+       
         // console.log(userInfo.user)
-        // console.log(userInfo)
-        return userInfo
+        // console.log(JSON.stringify(token.accessToken))
+        // console.log('User Info:', JSON.stringify(userInfo));
+       
+        return userInfo;
+
     } catch (error) {
         if (error.code === statusCodes.SIGN_IN_CANCELLED) {
             console.log('Sign-in process canceled');
@@ -33,12 +40,12 @@ export const authConfig = async () => {
     }
 }
 
-export const logoutConfig = async() =>{
+export const logoutConfig = async () => {
     try {
         await GoogleSignin.signOut();
         const userInfo = null;
         return userInfo;
-      } catch (error) {
+    } catch (error) {
         console.error(error);
-      }
+    }
 }

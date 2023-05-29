@@ -1,14 +1,20 @@
-import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import Youtube from 'YoutubeRently/assest/svg/youtube.svg'
-import Person from 'YoutubeRently/assest/svg/account-avatar-multimedia-svgrepo-com.svg'
 import Search from 'YoutubeRently/assest/svg/search-svgrepo-com.svg'
 import { fetchVideoRequest } from '../redux/action/videoAction'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 const Header = () => {
     const navigation = useNavigation()
     const dispatch = useDispatch()
+    const auth = useSelector(state => state.auth.auth)
+    // console.log(auth.user)
+    // const userInfoData= AsyncStorage.getItem('user_Info')
+    // const userInfo = JSON.parse(userInfoData)
+    // console.log(userInfo,'USERINFO')
+
     return (
         <View style={{
             backgroundColor: '#CAEDDE',
@@ -19,12 +25,9 @@ const Header = () => {
             justifyContent: 'space-between',
             alignItems: 'center'
         }}>
-            <View >
-                <TouchableOpacity onPress={() => dispatch(fetchVideoRequest())}
-                    style={{ flexDirection: 'row' }}>
-                    <Youtube width={50} height={50} />
-                    <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#f06451', }}>YouTube</Text>
-                </TouchableOpacity>
+            <View style={{ flexDirection: 'row',alignItems:'center' }}>
+                <Youtube width={50} height={50} />
+                <Text style={{ fontSize: 32, fontWeight: 'bold',marginLeft:5,}}>Hello {auth.user.givenName}</Text>
             </View>
 
             <View style={{
@@ -34,25 +37,15 @@ const Header = () => {
                 alignItems: 'center',
                 flexDirection: 'row',
             }}>
-                {/* <TextInput placeholder='Whats on Your mind ?'
-                style={{
-                    borderRadius:30,
-                    borderWidth:2,
-                    width:'70%',
-                    textAlign:'center',
-                    fontSize:18,
-                }}
-                value={value}
-                onChangeText={(text)=>setValue(text)}/> */}
 
                 <TouchableOpacity onPress={() => navigation.navigate('Search')}
                     style={{ marginRight: 20 }}>
                     <Search width={30} height={30} />
                 </TouchableOpacity>
-
-                <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+                {/* <Image source={{ uri:  }}/> */}
+                {/* <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
                     <Person width={30} height={30} />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>
         </View >
     )

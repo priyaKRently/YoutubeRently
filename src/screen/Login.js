@@ -26,7 +26,7 @@ const Login = () => {
       <GoogleSigninButton
       style={{ width:200, height: 60 ,marginTop:40,}}
       size={GoogleSigninButton.Size.Wide}
-      color={GoogleSigninButton.Color.Dark}
+      color={GoogleSigninButton.Color.Light}
       onPress={() => dispatch(authenticateUser())}
       />
       {/* <Google/> */}

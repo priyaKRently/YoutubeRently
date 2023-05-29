@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native'
 import React, { useEffect } from 'react'
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer, DarkTheme, DefaultTheme } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { useDispatch, useSelector } from 'react-redux'
@@ -13,43 +13,34 @@ import Home from '../screen/Home'
 import Search from '../component/Search'
 import Header from '../component/Header'
 import Tab from './Tab'
+import VideoPlayer from '../component/VideoPlayer'
+import VideoList from '../component/VideoList'
+import VideoScreen from '../screen/VideoScreen'
 
 const Stack = createNativeStackNavigator();
 
+
 const Route = () => {
     const auth = useSelector(state => state.auth.auth)
-    // console.log(auth.auth.idToken)
+    // console.log(auth.idToken)
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        const login = async () => {
-            const authData = await AsyncStorage.getItem('authData');
-            if (!authData) {
-                return;
-            }
-
-            const idToken = await JSON.parse(authData);
-            // if (new Date(expiryDate) <= new Date() ||
-            //     !accessToken || !refreshToken) {
-            //     dispatch(requestRefreshToken(refreshToken));
-            //     return;
-            // }
-            // dispatch(setRefreshToken({ accessToken, refreshToken }));
-        };
-        login();
-    }, [dispatch]);
 
     return (
-        <NavigationContainer>
-            <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <NavigationContainer theme={DefaultTheme}>
+            <Stack.Navigator >
 
                 {auth?.idToken ? (
                     <Stack.Group>
-                        <Stack.Screen name='Tab' component={Tab}/>
-                        <Stack.Screen name="Home" component={Home} />
-                        <Stack.Screen name="Profile" component={Profile} />
-                        <Stack.Screen name='Header' component={Header} />
-                        <Stack.Screen name='Search' component={Search} />
+                        <Stack.Screen name='Tab' component={Tab} options={{ headerShown: false }} />
+                        <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+                        <Stack.Screen name="Profile" component={Profile} options={{ headerShown: true }} />
+                        <Stack.Screen name='Header' component={Header} options={{ headerShown: false }} />
+                        <Stack.Screen name='Search' component={Search} options={{ headerShown: false }} />
+                        <Stack.Screen name='VideoPlayer' component={VideoPlayer} options={{ headerShown: false }} />
+                        {/* <Stack.Screen name='VideoList' component={VideoList} options={{ headerShown: false }} /> */}
+                        {/* <Stack.Screen name='VideoScreen' component={VideoScreen} options={{ headerShown: false }} /> */}
+
                     </Stack.Group>
                 ) : (
                     <Stack.Group>

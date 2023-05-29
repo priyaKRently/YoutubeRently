@@ -5,7 +5,7 @@ import {set_Video,fetch_Video_Request} from '../constant'
 
 function* fetchVideo() {
   try {
-    console.log('222')
+    // console.log('222')
     // Make API request to fetch videos
     const response = yield call(fetchVideoData);
 
