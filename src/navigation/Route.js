@@ -14,17 +14,13 @@ import Search from '../component/Search'
 import Header from '../component/Header'
 import Tab from './Tab'
 import VideoPlayer from '../component/VideoPlayer'
-import VideoList from '../component/VideoList'
-import VideoScreen from '../screen/VideoScreen'
 
 const Stack = createNativeStackNavigator();
 
 
 const Route = () => {
     const auth = useSelector(state => state.auth.auth)
-    // console.log(auth.idToken)
     const dispatch = useDispatch();
-
 
     return (
         <NavigationContainer theme={DefaultTheme}>
@@ -38,8 +34,6 @@ const Route = () => {
                         <Stack.Screen name='Header' component={Header} options={{ headerShown: false }} />
                         <Stack.Screen name='Search' component={Search} options={{ headerShown: false }} />
                         <Stack.Screen name='VideoPlayer' component={VideoPlayer} options={{ headerShown: false }} />
-                        {/* <Stack.Screen name='VideoList' component={VideoList} options={{ headerShown: false }} /> */}
-                        {/* <Stack.Screen name='VideoScreen' component={VideoScreen} options={{ headerShown: false }} /> */}
 
                     </Stack.Group>
                 ) : (

@@ -1,67 +1,45 @@
-import React, { useEffect } from 'react';
-import { View, Text, FlatList } from 'react-native';
-import { connect } from 'react-redux';
-import {
-  fetchRecommendedVideoRequest,
-  fetchRecommendedVideoSuccess,
-} from '../redux/action/nextAction';
+import { View, Text, FlatList, TouchableOpacity, Image, TextInput, Keyboard } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchRecommendedVideoRequest } from '../redux/action/nextAction'
+import MiniCard from './MiniCard'
+import { useNavigation } from '@react-navigation/native'
 
-const RecommendedVideos = ({
-  recommendedVideos,
-  recommendedNextPageToken,
-  recommendedLoading,
-  
-  fetchRecommendedVideosSuccess,
-  videoId,
-}) => {
-  console.log(recommendedVideos)
+const RecommendedVideos = (props) => {
+
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const recommendData = useSelector((state) => state.recommend.response);
+
+
   useEffect(() => {
-    fetchRecommendedVideoRequest(videoId, '');
-  }, [videoId]);
+    Keyboard.dismiss();
+    try {
+      if (props.videoId.trim() !== '') {
+        dispatch(fetchRecommendedVideoRequest(props.videoId));
+      }
+    } catch (error) { console.log(error) }
+  }, [props.videoId])
 
-  const handleScroll = (event) => {
-    const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
-    const isEndReached =
-      layoutMeasurement.height + contentOffset.y >= contentSize.height - 10;
-
-    if (
-      isEndReached &&
-      recommendedNextPageToken &&
-      !recommendedLoading
-    ) {
-      fetchRecommendedVideoRequest(videoId, recommendedNextPageToken);
-    }
-  };
 
   return (
-    <View onScroll={handleScroll}>
-      {/* Render your recommended video list */}
-      <FlatList
-        data={recommendedVideos}
-        keyExtractor={(video) => video.id}
-        renderItem={() => {
-          return (
-            <>
-            <Text >Hello{recommendedVideos.snippet.title}</Text>
+    <View>
+      <View style={{ marginBottom: 10 }}>
+        <FlatList
+          data={recommendData}
+          keyExtractor={(item) => item.id.videoId}
+          renderItem={({ item }) => {
+            return (
 
-            </>
-
-          )
-        }}
-      />
+              <MiniCard id={item.id.videoId}
+                title={item.snippet.title}
+                channel={item.snippet.channelTitle} />
+            )
+          }}
+        />
+      </View>
     </View>
-  );
-};
+  )
+}
 
-const mapStateToProps = (state) => ({
-  recommendedVideos: state.video.recommendedVideos,
-  recommendedNextPageToken: state.video.recommendedNextPageToken,
-  recommendedLoading: state.video.recommendedLoading,
-});
-
-const mapDispatchToProps = {
-  fetchRecommendedVideoRequest,
-  fetchRecommendedVideoSuccess,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(RecommendedVideos);
+export default RecommendedVideos;

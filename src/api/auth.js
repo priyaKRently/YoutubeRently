@@ -21,9 +21,6 @@ export const authConfig = async () => {
         const token = await GoogleSignin.getTokens();
         AsyncStorage.setItem('access_Token', JSON.stringify(token.accessToken));
        
-        // console.log(userInfo.user)
-        // console.log(JSON.stringify(token.accessToken))
-        // console.log('User Info:', JSON.stringify(userInfo));
        
         return userInfo;
 

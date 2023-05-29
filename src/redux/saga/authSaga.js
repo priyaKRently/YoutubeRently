@@ -18,14 +18,14 @@ const saveTokenToAsyncStorage = (idToken) => {
 function* getToken() {
     const auth = yield call(authConfig);
     const idToken = auth.idToken;
-    // console.log(idToken,'idtoken')
+  
     saveTokenToAsyncStorage(idToken);
     yield put({ type: set_Token, auth })
 }
 function* logout() {
     const auth = yield call(logoutConfig);
     const idToken = auth;
-    // console.log(idToken,'idtoken')
+   
     // saveTokenToAsyncStorage(idToken);
     yield put({ type: set_Token, auth })
 }

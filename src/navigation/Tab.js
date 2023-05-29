@@ -12,7 +12,7 @@ import SortsIcon from 'YoutubeRently/assest/svg/cd-svgrepo-com.svg'
 import SubscriptionIcon from 'YoutubeRently/assest/svg/material-svgrepo-com.svg'
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import VideoList from '../component/VideoList'
+
 
 
 const Tab = createBottomTabNavigator();

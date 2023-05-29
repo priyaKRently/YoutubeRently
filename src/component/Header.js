@@ -10,10 +10,6 @@ const Header = () => {
     const navigation = useNavigation()
     const dispatch = useDispatch()
     const auth = useSelector(state => state.auth.auth)
-    // console.log(auth.user)
-    // const userInfoData= AsyncStorage.getItem('user_Info')
-    // const userInfo = JSON.parse(userInfoData)
-    // console.log(userInfo,'USERINFO')
 
     return (
         <View style={{
@@ -25,9 +21,9 @@ const Header = () => {
             justifyContent: 'space-between',
             alignItems: 'center'
         }}>
-            <View style={{ flexDirection: 'row',alignItems:'center' }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Youtube width={50} height={50} />
-                <Text style={{ fontSize: 32, fontWeight: 'bold',marginLeft:5,}}>Hello {auth.user.givenName}</Text>
+                <Text style={{ fontSize: 32, fontWeight: 'bold', marginLeft: 5, }}>Hello {auth.user.givenName}</Text>
             </View>
 
             <View style={{
@@ -42,10 +38,7 @@ const Header = () => {
                     style={{ marginRight: 20 }}>
                     <Search width={30} height={30} />
                 </TouchableOpacity>
-                {/* <Image source={{ uri:  }}/> */}
-                {/* <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
-                    <Person width={30} height={30} />
-                </TouchableOpacity> */}
+
             </View>
         </View >
     )

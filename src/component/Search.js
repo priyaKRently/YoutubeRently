@@ -11,13 +11,9 @@ const Search = () => {
   const dispatch = useDispatch();
   const searchData = useSelector((state) => state.search.response);
   const [value, setValue] = useState('');
-  // console.log(searchData,33)
 
   const searchList = (value) => {
     Keyboard.dismiss();
-    // console.log('button clicked')
-
-
     try {
       if (value.trim() !== '') {
         dispatch(fetchSearchRequest(value));
@@ -36,7 +32,7 @@ const Search = () => {
         // justifyContent: 'space-around',
         backgroundColor: '#A4D0A4'
       }}>
-        <TouchableOpacity onPress={()=> navigation.navigate.goBack() }>
+        <TouchableOpacity onPress={() => navigation.navigate.goBack()}>
           <Back height={45} width={45} />
         </TouchableOpacity>
 
@@ -62,9 +58,6 @@ const Search = () => {
 
       </View >
 
-      {/* <TouchableOpacity onPress={() => searchList()}>
-        <Text style={{ fontSize: 30 }}>Fetch the videos</Text>
-      </TouchableOpacity> */}
       <View style={{ marginBottom: 10 }}>
         <FlatList
           data={searchData}

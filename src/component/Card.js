@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 const Card = (props) => {
     const navigation = useNavigation();
-    // const videos = useSelector((state) => state.video.response);
+    
 
     return (
         <View style={{

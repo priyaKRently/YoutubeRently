@@ -14,8 +14,5 @@ export const fetchVideosSuccess = videos => {
   }
 };
 
-// export const fetchVideosFailure = (error) => ({
-//   type: 'FETCH_VIDEOS_FAILURE',
-//   payload: error,
-// });
+
 

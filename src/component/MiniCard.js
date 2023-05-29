@@ -5,12 +5,16 @@ import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 const MiniCard = (props) => {
     const navigation = useNavigation();
-    // console.log(props.id,props.title)
-  
+
+
     return (
-        <View style={{ flexDirection: 'row', margin: 10,  }}>
-            <TouchableOpacity onPress={() => navigation.navigate('VideoPlayer', {videoId: props.id,title:props.title,channel:props.channel})}
-            style={{ flexDirection: 'row', margin: 10, marginBottom: 0, }}>
+        <View style={{ flexDirection: 'row', margin: 10, }}>
+            <TouchableOpacity onPress={() => navigation.navigate('VideoPlayer', {
+                videoId: props.id,
+                title: props.title,
+                channel: props.channel
+            })}
+                style={{ flexDirection: 'row', margin: 10, marginBottom: 0, }}>
                 <Image source={{ uri: `https://i.ytimg.com/vi/${props.id}/hqdefault.jpg` }}
                     style={{
                         height: 90,
