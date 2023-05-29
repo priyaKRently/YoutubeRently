@@ -6,9 +6,12 @@ Done :-
  Integrated Google's Oath,   
  Implemented HomeScreen and SearchScreen,  
  A new Screen to play video.    
- Recommended Videos list on the video player screen
-Not Done :- 
-Infinite  scroll
+ Recommended Videos list on the video player screen                  
+ 
+ 
+Not Done :-          
+
+Infinite scroll in video list
  
 
 Video Recording Link :- 
